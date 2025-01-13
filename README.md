@@ -12,14 +12,13 @@ curl -X POST "http://localhost:8080/auth/register?username=john&password=secret"
 
 it will log like this 
 ```bash 
-
 User Registered: john
-Hashed Password: $2a$10$nUcXIpXu2/lzn8a7IJI5pOEgvGABiIWFaRgr1xSrOK1OZmvbk8TSe
+Hashed Password: <hashedpassword>
 ```
 
 test the validation 
 ```bash 
-curl -X POST http://localhost:8080/auth/login \
-    -H "Content-Type: application/json" \
-    -d '{"username": "john", "password": "secret"}'
+curl -X POST "http://localhost:8080/auth/login?username=john&password=secret&storedHashedPassword=<hashedpassword>" \
+     -H "X-Requested-With: XMLHttpRequest" \
+     -H "Content-Type: application/x-www-form-urlencoded"
 ```
