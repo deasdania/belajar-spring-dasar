@@ -1,5 +1,7 @@
 package programmerzamannow.spring.core;
 
+import cn.dev33.satoken.stp.StpUtil;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +36,8 @@ public class AuthController {
     public String login(@RequestParam String username, @RequestParam String password, @RequestParam String storedHashedPassword) {
         // Check if the plain-text password matches the stored hashed password
         if (PasswordUtils.checkpw(password, storedHashedPassword)) {
+            String token = StpUtil.getTokenValue();
+            System.out.println("token: " + token);
             return "Login successful!";
         } else {
             return "Invalid credentials!";
